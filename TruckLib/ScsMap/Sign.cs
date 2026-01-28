@@ -105,6 +105,15 @@ namespace TruckLib.ScsMap
             set => Kdop.Flags[27] = value;
         }
 
+        /// <summary>
+        /// Gets or sets if collision is enabled.
+        /// </summary>
+        public bool Collision
+        {
+            get => !Kdop.Flags[30];
+            set => Kdop.Flags[30] = !value;
+        }
+
         public Sign() : base() 
         {
         }
