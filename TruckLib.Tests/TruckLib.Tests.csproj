@@ -59,6 +59,9 @@
     <None Update="Data\PrefabTest\car_dealer_01_fr.ppd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Data\PrefabTest\fr_r1_x_r1_t_narrow_tmpl.ppd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Data\PrefabTest\gas_plaza_01_ger.pmd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

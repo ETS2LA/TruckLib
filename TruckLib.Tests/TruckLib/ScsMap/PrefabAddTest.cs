@@ -24,7 +24,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void AddCrossing()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
 
             var expectedPositions = new Vector3[] {
                 new(50, 0, 50), new(32, 0, 32), new(50, 0, 14), new(68, 0, 32)
@@ -48,7 +48,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void AddCrossingRotated()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd,
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd,
                 Quaternion.CreateFromYawPitchRoll(MathEx.Rad(-90f), 0, 0));
 
             var expectedPositions = new Vector3[] {

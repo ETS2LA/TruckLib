@@ -105,7 +105,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void MergeRoadBwNodeIntoPrefab()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             var road = Road.Add(map, new Vector3(30, 0, 30), new Vector3(10, 0, 30), "blkw1");
 
             prefab.Nodes[1].Merge(road.Node);
@@ -121,7 +121,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void MergeRoadFwNodeIntoPrefabOrigin()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             var road = Road.Add(map, new Vector3(50, 0, 70), new Vector3(55, 0, 55), "blkw1");
 
             prefab.Nodes[0].Merge(road.ForwardNode);
@@ -137,7 +137,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void MergeRoadFwNodeIntoPrefab()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             var road = Road.Add(map, new Vector3(80, 0, 32), new Vector3(70, 0, 35), "blkw1");
 
             prefab.Nodes[3].Merge(road.ForwardNode);
@@ -153,7 +153,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void MergeRoadBwNodeIntoPrefabOriginThrows()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             var road = Road.Add(map, new Vector3(55, 0, 55), new Vector3(50, 0, 70), "blkw1");
 
             Assert.Throws<InvalidOperationException>(() => prefab.Nodes[0].Merge(road.Node));
@@ -191,7 +191,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void SplitRoadAndPrefab()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             var expectedPfNodeRot = prefab.Nodes[3].Rotation;
             var road = prefab.AppendRoad(3, new Vector3(100, 0, 20), "ger1");
 
@@ -213,7 +213,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void SplitRoadAndPrefabAtOrigin()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             prefab.ChangeOrigin(3);
             var expectedPfNodeRot = prefab.Nodes[0].Rotation;
             var road = prefab.AppendRoad(0, new Vector3(100, 0, 20), "ger1");
@@ -236,8 +236,8 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void SplitPrefabs()
         {
             var map = new Map();
-            var prefab1 = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
-            var prefab2 = Prefab.Add(map, new Vector3(100, 0, 55), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab1 = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
+            var prefab2 = Prefab.Add(map, new Vector3(100, 0, 55), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             prefab1.Attach(3, prefab2, 1);
 
             var newNode = prefab1.Nodes[3].Split();
