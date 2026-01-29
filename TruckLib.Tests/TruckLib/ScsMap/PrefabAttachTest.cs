@@ -176,6 +176,12 @@ namespace TruckLib.Tests.TruckLib.ScsMap
             Assert.True(road.Node.IsRed);
             Assert.False(map.Nodes.ContainsKey(oldNodeUid));
 
+            // Ensure length recalculation happened and didn't mess up
+            // the previous length
+            Assert.Equal(32.5727, road.Length, 1e-4);
+            Assert.Equal(39.6189, (road.BackwardItem as Road).Length, 1e-4);
+
+            // Ensure terrain grid recalculation happend
             Assert.Equal(9, road.Left.Terrain.QuadData.Cols);
             Assert.Equal(0, road.Left.Terrain.QuadData.Rows);
             Assert.Equal(9, road.Right.Terrain.QuadData.Cols);
