@@ -506,6 +506,7 @@ namespace TruckLib.ScsMap
             using var r = new BinaryReader(fileStream);
 
             var header = new Header();
+            header.EnforceVersion = Header.EnforceVersionBehavior.AllowLower;
             header.Deserialize(r);
 
             EditorMapId = r.ReadUInt64();
@@ -525,7 +526,8 @@ namespace TruckLib.ScsMap
         /// <param name="sectors">If set, only the given sectors will be loaded.</param>
         private void ReadSectors(string mapDirectory, IFileSystem fs, IList<SectorCoordinate> sectors = null)
         {
-            var baseFiles = fs.GetFiles(mapDirectory).Where(f => Path.GetExtension(f) == ".base");
+            var baseFiles = fs.GetFiles(mapDirectory)
+                .Where(f => Path.GetExtension(f) == ".base");
 
             // create itemless instances for all the sectors first;
             // this is so we have references to the sectors
@@ -666,7 +668,7 @@ namespace TruckLib.ScsMap
             // are still on version 903 or 904, but since the Sound item itself
             // has not changed between 903 and 905, we don't need to throw
             // an exception over this.
-            header.EnforceVersion = false;
+            header.EnforceVersion = Header.EnforceVersionBehavior.AllowLower;
             header.Deserialize(r);
             ReadItems(r, ItemFile.Snd);
             ReadNodes(r);

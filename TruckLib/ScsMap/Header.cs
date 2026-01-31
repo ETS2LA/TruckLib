@@ -33,15 +33,38 @@ namespace TruckLib.ScsMap
         /// <summary>
         /// Whether <see cref="Deserialize"/> should throw an exception.
         /// </summary>
-        /// <remarks>Allows for reading .snd files in the base game that haven't been updated yet.</remarks>
-        internal bool EnforceVersion { get; set; } = true;
+        /// <remarks>Allows for reading .snd or .mbd files that haven't been updated yet.</remarks>
+        internal EnforceVersionBehavior EnforceVersion { get; set; } = EnforceVersionBehavior.Strict;
+
+        internal enum EnforceVersionBehavior
+        {
+            /// <summary>
+            /// An exception is thrown if the version number is not an exact match.
+            /// </summary>
+            Strict = 0,
+
+            /// <summary>
+            /// An exception is thrown if the version number is higher than the supported version.
+            /// Lower versions are allowed.
+            /// </summary>
+            AllowLower = 1,
+
+            /// <summary>
+            /// All version numbers are allowed. No exception is thrown for any reason.
+            /// </summary>
+            None = 2,
+        }
 
         /// <inheritdoc/>
         /// <exception cref="UnsupportedVersionException"></exception>
         public virtual void Deserialize(BinaryReader r, uint? version = null)
         {
             CoreMapVersion = r.ReadUInt32();
-            if (EnforceVersion && CoreMapVersion != supportedVersion)
+            if (EnforceVersion == EnforceVersionBehavior.Strict && CoreMapVersion != supportedVersion)
+            {
+                throw new UnsupportedVersionException($"Map version {CoreMapVersion} is not supported.");
+            }
+            else if (EnforceVersion == EnforceVersionBehavior.AllowLower && CoreMapVersion > supportedVersion)
             {
                 throw new UnsupportedVersionException($"Map version {CoreMapVersion} is not supported.");
             }
