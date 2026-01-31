@@ -680,7 +680,6 @@ namespace TruckLib.ScsMap
         /// </summary>
         /// <param name="path">The .layer file of the sector.</param>
         /// <param name="fs">The file system to load the file from.</param>
-        /// <exception cref="KeyNotFoundException"></exception>
         private void ReadLayer(string path, IFileSystem fs)
         {
             if (!fs.FileExists(path))
@@ -698,13 +697,12 @@ namespace TruckLib.ScsMap
                 if (uid == EofMarker)
                     break;
 
-                if (!MapItems.TryGetValue(uid, out MapItem item))
-                {
-                    throw new KeyNotFoundException($"{ToString()}.{Sector.LayerExtension} contains " +
-                        $"unknown UID {uid:X} - can't continue.");
-                }
                 var layer = r.ReadByte();
-                item.Layer = layer;
+
+                if (MapItems.TryGetValue(uid, out MapItem item))
+                {
+                    item.Layer = layer;
+                }
             }
         }
 
