@@ -28,14 +28,16 @@ namespace TruckLib.Tests.TruckLib.ScsMap.Serialization
 
         private void TestProperties(Model model)
         {
-            Assert.Equal("ibe_0z001", model.Name);
-            Assert.Equal("shop", model.Variant);
-            Assert.Equal("default", model.Look);
+            Assert.Equal("ar_5e001", model.Name);
+            Assert.Equal("small", model.Variant);
+            Assert.Equal("rusty_white", model.Look);
 
             Assert.False(model.Shadows);
             Assert.True(model.WaterReflection);
             Assert.True(model.Collision);
-            Assert.Equal((Nibble)3, model.ColorVariant);
+
+            Assert.Contains("_part04", model.AdditionalParts);
+            Assert.Contains("_part05", model.AdditionalParts);
 
             Assert.Equal(720, model.ViewDistance);
         }

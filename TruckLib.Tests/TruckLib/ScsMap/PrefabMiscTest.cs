@@ -54,7 +54,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void ChangeOrigin()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
 
             AssertEx.Equal(new Vector3(50, 0, 50), prefab.Nodes[0].Position, 0.01f);
             Assert.True(prefab.Nodes[0].IsRed);
@@ -71,7 +71,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void ChangeOriginBack()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
 
             prefab.ChangeOrigin(2);
             prefab.ChangeOrigin(0);
@@ -83,7 +83,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void ChangeOriginThrowsIfNodeOccupied()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
 
             prefab.AppendRoad(2, new Vector3(10, 0, 10), "ger1");
             Assert.Throws<InvalidOperationException>(() => prefab.ChangeOrigin(2));
@@ -93,8 +93,8 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void MoveConnected()
         {
             var map = new Map();
-            var prefab1 = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd);
-            var prefab2 = Prefab.Add(map, new Vector3(100, 0, 55), "dlc_blkw_02", fixture.CrossingPpd);
+            var prefab1 = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd);
+            var prefab2 = Prefab.Add(map, new Vector3(100, 0, 55), "dlc_blkw_02", fixture.BlkwCrossingPpd);
             prefab2.ChangeOrigin(1);
             prefab1.Attach(3, prefab2, 0);
 

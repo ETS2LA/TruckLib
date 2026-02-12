@@ -182,7 +182,7 @@ namespace TruckLib.Tests.TruckLib.ScsMap
         public void DeleteWhileBwItemIsPrefab()
         {
             var map = new Map();
-            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.CrossingPpd,
+            var prefab = Prefab.Add(map, new Vector3(50, 0, 50), "dlc_blkw_02", fixture.BlkwCrossingPpd,
                 Quaternion.CreateFromYawPitchRoll(MathEx.Rad(-90f), 0, 0));
             var road = prefab.AppendRoad(1, new Vector3(55, 0, 10), "blkw1");
 
