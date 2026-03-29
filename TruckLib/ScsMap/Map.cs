@@ -546,14 +546,26 @@ namespace TruckLib.ScsMap
 
             // now read in the sectors
             int i = 0;
+            int failed = 0;
             foreach (var (_, sector) in Sectors)
             {
-                Trace.WriteLine($"Reading sector {sector}");
-                OnSectorLoading(sector, i, Sectors.Count);
-                sector.ReadDesc(Path.ChangeExtension(sector.BasePath, Sector.DescExtension), fs);
-                ReadSector(sector.BasePath, fs);
+                try
+                {
+                    Trace.WriteLine($"Reading sector {sector}");
+                    OnSectorLoading(sector, i, Sectors.Count);
+                    sector.ReadDesc(Path.ChangeExtension(sector.BasePath, Sector.DescExtension), fs);
+                    ReadSector(sector.BasePath, fs);
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine($"Error reading sector {sector}: {ex}");
+                    failed++;
+                }
                 i++;
             }
+
+            Console.WriteLine($"Finished reading sectors with {failed} failures.");
+            Console.WriteLine($"Expect missing map data and navigation errors in affected regions.");
         }
 
         /// <summary>
